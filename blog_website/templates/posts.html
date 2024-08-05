@@ -1,0 +1,18 @@
+
+{% extends "posts_div.html" %}
+
+{% block title%}{{username}}'s blogs{% endblock %}
+{% block  header%}
+
+<div class="text-start">
+    <a href="/home" >
+        <button type="button" class="btn btn-secondary" align="">Go back to home page</button>
+    </a>
+</div>  
+<br>
+<br>
+{{username}}'s blogs
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

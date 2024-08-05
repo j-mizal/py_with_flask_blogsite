@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+
+{% block title%}Home{% endblock %}
+{% block content%}
+<br>
+<br>
+<a href="/home">
+    <button type="button" class="btn btn-secondary">Go back to home page</button>
+</a>    
+<br>
+<br>
+<h1 align="center">Post a blog</h1>
+<br>
+<h3 align="center"><i>Speak your mind</i></h3>
+<br>
+<form action="{{ url_for('views.create_post') }}", method="POST">
+    <textarea name="text" id="text" class="form-control"></textarea>
+    <br>
+    <br>
+    <div align="center">
+    <button type="submit" class="btn btn-lg btn-primary">Post</button>
+    </div>
+</form>
+{% endblock %}

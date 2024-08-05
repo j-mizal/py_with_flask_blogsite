@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+
+{% block title%}Signup{% endblock %}
+{% block content%}
+<br> <br>
+<h3>Join us today, sign up for free.</h3>
+<br>
+<br>
+<form action="{{url_for('auth.signup')}}" method="POST">
+    <label for="email">Email address</label>
+    <input type="text" id="email" name="email" class="form-control" placeholder="please enter email">
+    <br>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" class="form-control" placeholder="please enter username">
+    <br>
+    <label for="password1">Password</label>
+    <input type="password1" id="password1" name="password1" class="form-control" placeholder="please enter password">
+    <br>
+    <label for="password2">Re-enter password</label>
+    <input type="password2" id="password2" name="password2" class="form-control" placeholder="please re-enter password">
+    <br>
+    <div align="center">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
+{% endblock %}
