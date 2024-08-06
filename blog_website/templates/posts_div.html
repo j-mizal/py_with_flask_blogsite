@@ -11,7 +11,7 @@
 <br>
 <h2>Your posts</h2>
 <br>
-<div id="posts">
+<div id="posts" >
     {% for post in posts %}
     <div class="card border-dark mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -26,14 +26,54 @@
             {% endif %}
         </div>
         
-        <div class="card-body">
+<div class="card-body">
             <div class="card-text">{{post.text}}</div>
-            
+            <br>
+            <div class="collapse" id="comments-{{post.id}}">
+                <div class="card">
+                    <div class="card-body" id="comments-expanded-{{post.id}}">
+                        {% if post.comments %}
+                            {% for comment in post.comments %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="/post/{{comment.user.username}}">{{comment.user.username}}</a><span class="fst-italic">: {{comment.text}}</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <small class="text-muted">{{comment.date_created}}</small>
+                                    {% if user.id == comment.author or user.id == post.author %}
+                                    <div class="btn-group ms-2">
+                                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-bs-toggle="dropdown"></button>    
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/delete-comment/{{comment.id}}" class="dropdown-item">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>  
+            <p class="card-text">
+            {% if post.comments | length > 0 %}
+                <a href="#comments-{{post.id}}" data-bs-toggle="collapse" role="button">
+                    <small>View {{post.comments|length}} comments</small>
+                </a>
+            {% else %}
+                <small class="text-muted">No comments to show</small>
+            {% endif %}
+            </p>
+            <form class="input-group mb-3" action="create-comment/{{post.id}}" method="POST">
+                <input type="text" name="text" class="form-control" placeholder="Say something here!">
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </form> 
         </div>
         <div>
-            <div class="bg-dark text-white p-1 " >{{post.date_created}}</div>
+            <div class="bg-dark text-white p-1">{{post.date_created}}</div>
         </div>
-    </div> 
+    </div>
     {% endfor %}
     {% block footer %}
     <br>
@@ -44,7 +84,6 @@
     </div>
     <br>
     <br>
-
 </div>
 
 {% endblock %}
